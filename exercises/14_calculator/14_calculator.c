@@ -3,11 +3,19 @@
 // TODO：定义四则运算规则
 // hint：似乎除数有一些特殊情况，需要处理
 
-// I AM NOT DONE
 int add(int a, int b) { return a + b;}
 int subtract(int a, int b) { return a - b;}
 int multiply(int a, int b) { return a * b;}
-int divide(int a, int b) { return b ? a / b : 0; }
+int divide(int a, int b) { 
+    if (b) {
+        return a / b;
+    }
+    else {
+        printf("error!\n");
+        return 0;
+    }
+    
+}
 
 
 
