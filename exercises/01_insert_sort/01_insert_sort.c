@@ -10,6 +10,23 @@ typedef struct {
 void insertion_sort(Student students[], int n) {
     // TODO: 在这里添加你的代码
     // I AM NOT DONE
+    printf("%d \n", n);
+    for (int i = 1; i < n; i++) {
+        int key = students[i].score;
+        Student s_tmp = students[i];
+        int j = i - 1;
+        while( j >= 0 && students[j].score < key) {
+            students[j + 1].score = students[j].score;
+            //j+1.name = j.name;
+            char tmp[20];
+            strcpy(tmp, students[j].name);
+            strcpy(students[j].name, students[j+1].name);
+            strcpy(students[j+1].name, tmp);
+            j--;
+        }
+        students[j+1].score = s_tmp.score;
+        strcpy(students[j + 1].name, s_tmp.name);
+    }
 }
 
 int main(void) {
