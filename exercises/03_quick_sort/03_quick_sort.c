@@ -14,7 +14,31 @@ Student students[MAX_STUDENTS];
 
 void quick_sort(int left, int right) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    if(left >= right) {
+        return;
+    }
+
+    int pivot = students[(left + right) / 2].score;
+    int begin = left, end = right;
+
+    while(begin <= end) {
+        while(students[begin].score > pivot && begin <= end) {
+            begin++;
+        }
+
+        while(students[end].score < pivot && begin <= end) {
+            end--;
+        }
+        if(begin <= end) {
+            Student s_tmp = students[begin];
+            students[begin] = students[end];
+            students[end] = s_tmp;
+            begin++;
+            end--;
+        }
+    }
+    quick_sort(left, end);
+    quick_sort(begin,right);
 }
 
 int main(void) {

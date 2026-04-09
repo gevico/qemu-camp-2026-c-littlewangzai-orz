@@ -8,23 +8,26 @@ typedef struct {
 } Student;
 
 void insertion_sort(Student students[], int n) {
-    // TODO: 在这里添加你的代码
+    // 插入排序的思路：
+    // 1. 把 students[0] 看成已经排好序的“有序区”
+    // 2. 从 students[1] 开始，每次取无序区的第一个元素
+    // 3. 把这个元素插入前面合适的位置，这样有序区就会不断扩大
     printf("%d \n", n);
     for (int i = 1; i < n; i++) {
+        // key 表示当前要插入的分数，也就是“无序区的第一个分数”
         int key = students[i].score;
+        // 把当前学生整体保存下来，最后要插回正确位置
         Student s_tmp = students[i];
+        // j 从有序区的最后一个位置开始，向前寻找插入点
         int j = i - 1;
+        // 如果前面的学生分数更低，就把它整体向后挪一位
+        // 这样可以给当前学生空出一个插入位置
         while( j >= 0 && students[j].score < key) {
-            students[j + 1].score = students[j].score;
-            //j+1.name = j.name;
-            char tmp[20];
-            strcpy(tmp, students[j].name);
-            strcpy(students[j].name, students[j+1].name);
-            strcpy(students[j+1].name, tmp);
+            students[j + 1] = students[j];
             j--;
         }
-        students[j+1].score = s_tmp.score;
-        strcpy(students[j + 1].name, s_tmp.name);
+        // 循环结束后，j+1 就是当前学生应该插入的位置
+        students[j+1] = s_tmp;
     }
 }
 
