@@ -41,7 +41,34 @@ void processFile(const char *filename) {
 
     switch (choice) {
         // TODO: 在这里添加你的代码
-        // I AM NOT DONE
+        case 1:
+            int *arr_int = (int*) malloc(sizeof(int) * n);
+            for (int i = 0; i < n; i++) {
+                if (fscanf(fin, "%d", &arr_int[i]) != 1) break;
+            }
+            sort(arr_int, n, sizeof(int), compareInt);
+            printf("整数排序结果: ");
+            for (int i = 0; i < n; i++) {
+                printf("%d ", arr_int[i]);
+            }
+            printf("\n");
+            free(arr_int);
+            break;
+        case 2:
+            float *arr_float = (float*) malloc(sizeof(float) * n);
+            for (int i = 0; i < n; i++) {
+                if (fscanf(fin, "%f", &arr_float[i]) != 1) break;
+            }
+            sort(arr_float, n, sizeof(float), compareFloat);
+            printf("浮点数排序结果: ");
+            for (int i = 0; i < n; i++) {
+                printf("%.2f ", arr_float[i]);  // 或 %g
+            }
+            printf("\n");
+            free(arr_float);
+            break;
+        default:
+            break;
     }
 
     fclose(fin);
