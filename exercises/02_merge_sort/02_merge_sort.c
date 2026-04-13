@@ -13,9 +13,67 @@ typedef struct {
 Student students[MAX_STUDENTS];
 Student temp[MAX_STUDENTS];
 
+void merge(int left, int mid, int right) {
+    // 左右两个有序区间分别是 [left, mid] 和 [mid+1, right]
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    Student left_arr[n1];
+    Student right_arr[n2];
+
+    for(int i = 0; i < n1; i++) {
+        left_arr[i] = students[left + i];
+    }
+
+    for(int j = 0; j < n2; j++) {
+        right_arr[j] = students[mid + 1 + j];
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = left;
+
+    // 逐个比较两个子数组，按成绩从高到低写入 temp
+    while(i < n1 && j < n2) {
+        if(left_arr[i].score > right_arr[j].score) {
+            temp[k] = left_arr[i];
+            k++;
+            i++;
+        }
+        else {
+            temp[k] = right_arr[j];
+            k++;
+            j++;
+        }
+    }
+
+    // 把尚未处理完的一侧直接追加到 temp
+    while(i < n1) {
+        temp[k] = left_arr[i];
+        k++;
+        i++;
+    }
+
+    while(j < n2) {
+        temp[k] = right_arr[j];
+        k++;
+        j++;
+    }
+
+    // 将合并结果拷回原数组对应区间
+    for(int p = left; p <= right; p++) {
+        students[p] = temp[p];
+    }
+}
+
 void merge_sort(int left, int right) {
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    // 分治：先递归排好左右两半，再调用 merge 合并
+    if( left < right) {
+        int mid = left + (right - left) / 2;
+        merge_sort(left, mid);
+        merge_sort(mid + 1, right);
+        merge(left, mid, right);
+    }
 }
 
 int main(void) {
@@ -47,4 +105,4 @@ int main(void) {
     }
 
     return 0;
-}
+} 

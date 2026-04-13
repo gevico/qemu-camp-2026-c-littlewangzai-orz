@@ -25,6 +25,12 @@
 | 12 | `12_student_management` | 已通过 | 结构体数组 + 查找/增加/删除逻辑 |
 | 14 | `14_calculator` | 已通过 | 输入解析和运算分发要稳定 |
 
+## 当前正在攻克
+
+| 题号 | 题目 | 状态 | 当前理解 |
+| --- | --- | --- | --- |
+| 05 | `05_binary_search` | 进行中 | 已理解“看中间、砍一半”，正在把边界和字符串/名字查找想清楚 |
+
 ## 每题简记
 
 ### 01_insert_sort
@@ -80,6 +86,55 @@ for (int i = 0; i < n; i++) {
 }
 return -1;
 ```
+
+### 05_binary_search
+
+- 进行中。
+- 重点：
+  - 二分查找只能用于有序数据。
+  - 每次看中间元素，然后把搜索范围缩成一半。
+  - `left`、`right`、`mid` 是核心。
+- 容易忘：
+  - 边界更新时要排除 `mid` 自己，所以是 `mid + 1` 和 `mid - 1`。
+  - 名字查找不是直接比大小，而是用 `strcmp`。
+  - 如果数组没排序，就不能用二分。
+- 实现记忆：
+
+```c
+int left = 0;
+int right = n - 1;
+
+while (left <= right) {
+  int mid = (left + right) / 2;
+
+  if (arr[mid] == target) {
+    return mid;
+  } else if (arr[mid] < target) {
+    left = mid + 1;
+  } else {
+    right = mid - 1;
+  }
+}
+
+return -1;
+```
+- 如果查名字：
+
+```c
+int cmp = strcmp(names[mid], target);
+
+if (cmp == 0) {
+  return mid;
+} else if (cmp < 0) {
+  left = mid + 1;
+} else {
+  right = mid - 1;
+}
+```
+- 我自己的记忆句：
+  - 比中间大，去右边。
+  - 比中间小，去左边。
+  - 每次都把范围砍一半。
 
 ### 06_stack_maze
 
@@ -308,13 +363,14 @@ case '/':
 4. 如果是路径题：测试要的是起点到终点，还是终点到起点。
 5. 如果是 BFS：队列不是路径，记得想清楚 `parent` 怎么存。
 6. 如果是 DFS：栈里装的是当前路径，不是所有访问点。
+7. 如果是二分查找：先确认数据是不是有序，再写 `left/right/mid`。
 
 ## 建议下一批练习
 
 按现在的学习连续性，下一批最适合继续做的是：
 
-1. `08_circular_queue`
-2. `05_binary_search`
+1. `05_binary_search`
+2. `08_circular_queue`
 3. `02_merge_sort`
 4. `13_universal_sorter`
 
