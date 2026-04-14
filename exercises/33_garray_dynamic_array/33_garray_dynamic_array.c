@@ -29,19 +29,44 @@ typedef struct {
 /* 接口：初始化动态数组 */
 GArray* garray_init(size_t elem_size) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    GArray *p = malloc(sizeof(GArray));
+    p->data = malloc(GARRAY_INIT_CAP * elem_size);
+    p->len = 0;
+    p->capacity = GARRAY_INIT_CAP;
+    p->elem_size = elem_size;
+    return p;
 }
 
 /* 接口：追加单个元素，必要时扩容为原来的 2 倍 */
 void garray_append(GArray* arr, void* elem) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    if(arr->len >= arr -> capacity && arr->len > 0) {
+        void *new_data = realloc(arr->data, arr->capacity * 2 * arr->elem_size);
+        if (!new_data) {
+            return; // 扩容失败，原来的 arr->data 还在
+        }
+        arr->data = new_data;
+        arr->capacity = arr->capacity * 2;
+        char *dest = (char*) (arr->data) + arr->len * arr->elem_size;
+        memcpy(dest, elem, arr->elem_size);
+        arr->len++;  
+    }
+    else {
+        char *dest = (char*) (arr->data) + arr->len * arr->elem_size;
+        memcpy(dest, elem, arr->elem_size);
+        arr->len++;  
+    }
 }
 
 /* 接口：释放动态数组 */
 void garray_free(GArray* arr) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+
+    if (arr == NULL) {
+    return;
+    }
+    free(arr->data);
+    free(arr);
 }
 
 int main(void) {
