@@ -6,9 +6,13 @@ SRCS = 18_mywc.c mywc.c
 OBJS := $(SRCS:.c=.o)
 
 all: $(TARGET)
-
 # TODO: 在这里添加你的代码
-# I AM NOT DONE
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c mywc.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(OBJS)
