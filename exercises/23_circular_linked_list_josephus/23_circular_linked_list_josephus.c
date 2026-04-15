@@ -23,13 +23,23 @@ static void josephus_problem(int n, int k, int m) {
 
     // 起始位置移动到第 k 个
     for (int i = 1; i < k; ++i) {
-        // TODO: 在这里添加你的代码
-        // I AM NOT DONE
+        prev = current;
+        current = current->next;
     }
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
-    
+    for (int out = 0; out < n; ++out) {
+        // 走 m-1 步，prev 和 current 同步前进
+        for (int i = 0; i < m - 1; ++i) {
+            prev = current;
+            current = current->next;
+        }
+        // 此时 current 指向要出列的人，prev 是它的前驱
+        printf("%d ", current->id);
+        Node* next = current->next;
+        prev->next = next;   // 前驱跳过被删节点
+        free(current);
+        current = next;
+    }
     printf("\n");
 }
 

@@ -4,49 +4,68 @@
 
 ## 当前状态
 
-- 统计时间：`2026-04-14T06:30:37Z`
+- 统计时间：`2026-04-15`
 - 总题数：`40`
-- 已通过：`18`
-- 未完成：`22`
-- 当前得分：`90 / 200`
+- 已通过：`26`
+- 未完成：`14`
+- 当前得分：`130 / 200`
 
 ## 当前已通过练习
 
-| 题号 | 题目 | 状态 | 我应该记住什么 |
-| --- | --- | --- | --- |
-| 01 | `01_insert_sort` | 已通过 | 插入排序的核心是“前面保持有序，把当前元素插进去” |
-| 02 | `02_merge_sort` | 已通过 | 先拆分再合并，合并时用双指针保证有序 |
-| 03 | `03_quick_sort` | 已通过 | 快速排序的关键是分区，递归处理左右子区间 |
-| 04 | `04_linear_search` | 已通过 | 线性查找就是从头到尾逐个比较 |
-| 05 | `05_binary_search` | 已通过 | 只对有序数据生效，关键是正确更新边界 |
-| 06 | `06_stack_maze` | 已通过 | DFS 用栈，栈里存当前路径，走不通就回退 |
-| 07 | `07_queue_maze` | 已通过 | BFS 用队列，`parent` 用来回溯最短路径 |
-| 08 | `08_circular_queue` | 已通过 | 环形队列用取模回绕，重点是判空判满条件 |
-| 09 | `09_word_counter` | 已通过 | 核心是逐字符扫描并统计 |
-| 10 | `10_my_strcpy` | 已通过 | 指针或下标拷贝字符串，记得补 `\0` |
-| 11 | `11_command_interpreter` | 已通过 | 状态机解析参数时，开始位置和结束位置都要想清楚 |
-| 12 | `12_student_management` | 已通过 | 结构体数组 + 查找/增加/删除逻辑 |
-| 13 | `13_universal_sorter` | 已通过 | 把“比较逻辑”抽出来，排序流程可复用 |
-| 14 | `14_calculator` | 已通过 | 输入解析和运算分发要稳定 |
-| 15 | `15_url_parser` | 已通过 | 先切协议/主机/路径，再处理端口和边界 |
-| 16 | `16_mysed` | 已通过 | 按规则逐行处理，替换时注意匹配范围 |
-| 17 | `17_myfile` | 已通过 | 文件操作要检查返回值，错误路径也要覆盖 |
-| 18 | `18_mywc` | 已通过 | 统计逻辑与输入边界（空文件、最后一行）要一致 |
+| 题号 | 题目 | 我应该记住什么 |
+| --- | --- | --- |
+| 01 | `01_insert_sort` | 插入排序的核心是"前面保持有序，把当前元素插进去" |
+| 02 | `02_merge_sort` | 先拆分再合并，合并时用双指针保证有序 |
+| 03 | `03_quick_sort` | 快速排序的关键是分区，递归处理左右子区间 |
+| 04 | `04_linear_search` | 线性查找就是从头到尾逐个比较 |
+| 05 | `05_binary_search` | 只对有序数据生效，关键是正确更新边界 |
+| 06 | `06_stack_maze` | DFS 用栈，栈里存当前路径，走不通就回退 |
+| 07 | `07_queue_maze` | BFS 用队列，`parent` 用来回溯最短路径 |
+| 08 | `08_circular_queue` | 环形队列用取模回绕，重点是判空判满条件 |
+| 09 | `09_word_counter` | 核心是逐字符扫描并统计 |
+| 10 | `10_my_strcpy` | 指针或下标拷贝字符串，记得补 `\0` |
+| 11 | `11_command_interpreter` | 状态机解析参数时，开始位置和结束位置都要想清楚 |
+| 12 | `12_student_management` | 结构体数组 + 查找/增加/删除逻辑 |
+| 13 | `13_universal_sorter` | 把"比较逻辑"抽出来，排序流程可复用 |
+| 14 | `14_calculator` | 输入解析和运算分发要稳定 |
+| 15 | `15_url_parser` | 先切协议/主机/路径，再处理端口和边界 |
+| 16 | `16_mysed` | 按规则逐行处理，替换时注意匹配范围 |
+| 17 | `17_myfile` | 文件操作要检查返回值，错误路径也要覆盖 |
+| 18 | `18_mywc` | 统计逻辑与输入边界（空文件、最后一行）要一致 |
+| 21 | `21_singly_linked_list_josephus` | 单链表模拟约瑟夫环，删节点时先保存 next，再 free |
+| 22 | `22_doubly_circular_queue` | 双向环形队列，注意前后指针的更新顺序 |
+| 23 | `23_circular_linked_list_josephus` | 环形链表删节点必须用 prev 维护前驱，否则链表断链 |
+| 27 | `27_asm_gcd` | 内联汇编实现辗转相除法，注意寄存器约束 |
+| 28 | `28_operator_overflow` | 无符号整数加减乘除的溢出检测 |
+| 29 | `29_swap_endian` | 位操作交换字节序，`((x >> 24) & 0xFF)` 等四段组合 |
+| 31 | `31_event_handler` | 函数指针数组实现事件回调分发 |
+| 33 | `33_garray_dynamic_array` | `realloc` 扩容，`void*` 泛型，`memcpy` 拷贝元素 |
 
-## 当前正在攻克
+## 当前未通过 / 未完成练习
 
-| 题号 | 题目 | 状态 | 当前理解 |
-| --- | --- | --- | --- |
-| 19 | `19_mytrans` | 进行中 | 已准备开始，先确认测试期望的字符转换规则和输出格式 |
+| 题号 | 题目 | 备注 |
+| --- | --- | --- |
+| 19 | `19_mytrans` | 进行中 |
+| 20 | `20_mybash` | 未开始 |
+| 24 | `24_prev_binary_tree` | 有 segfault，需要修 |
+| 25 | `25_counter_letter` | 未开始 |
+| 26 | `26_hash_counter` | 未开始 |
+| 30 | `30_debug_print` | 未开始 |
+| 32 | `32_container_of_macro` | 未开始 |
+| 34 | `34_protocol_header_parser` | 未开始 |
+| 35 | `35_elf_info_parser` | 未开始 |
+| 36 | `36_lru_cache` | 未开始 |
+| 37 | `37_bitmap_operations` | 未开始 |
+| 38 | `38_thread_safe_ring_buffer` | 未开始 |
+| 39 | `39_strtok_r_thread_safe` | 未开始 |
+| 40 | `40_bloom_filter_bitmap` | 未开始 |
 
 ## 每题简记
 
 ### 01_insert_sort
 
-- 已通过。
 - 重点：把当前元素插入到前面已经有序的部分。
-- 容易忘：内层循环是在“挪位置”，不是直接乱换。
-- 实现记忆：
+- 容易忘：内层循环是在"挪位置"，不是直接乱换。
 
 ```c
 for (int i = 1; i < n; i++) {
@@ -60,370 +79,226 @@ for (int i = 1; i < n; i++) {
 }
 ```
 
+### 02_merge_sort
+
+- 重点：分治，递归拆分后在线性时间内合并两个有序段。
+- 容易忘：合并后把剩余元素补齐，临时数组边界别写错。
+
 ### 03_quick_sort
 
-- 已通过。
 - 重点：先分区，再递归。
 - 容易忘：基准值、左右指针移动、递归边界。
-- 实现记忆：
 
 ```c
 int pivot = arr[right];
 int i = left - 1;
 for (int j = left; j < right; j++) {
-  if (arr[j] < pivot) {
-    i++;
-    swap(&arr[i], &arr[j]);
-  }
+  if (arr[j] < pivot) { i++; swap(&arr[i], &arr[j]); }
 }
 swap(&arr[i + 1], &arr[right]);
 ```
 
 ### 04_linear_search
 
-- 已通过。
 - 重点：从头扫到尾，找到就返回，找不到返回失败值。
-- 容易忘：最坏情况要比较完整个数组。
-- 实现记忆：
 
 ```c
 for (int i = 0; i < n; i++) {
-  if (arr[i] == target) {
-    return i;
-  }
+  if (arr[i] == target) return i;
 }
 return -1;
 ```
 
 ### 05_binary_search
 
-- 已通过。
-- 重点：
-  - 二分查找只能用于有序数据。
-  - 每次看中间元素，然后把搜索范围缩成一半。
-  - `left`、`right`、`mid` 是核心。
-- 容易忘：
-  - 边界更新时要排除 `mid` 自己，所以是 `mid + 1` 和 `mid - 1`。
-  - 名字查找不是直接比大小，而是用 `strcmp`。
-  - 如果数组没排序，就不能用二分。
-- 实现记忆：
+- 重点：只能用于有序数据，每次把范围砍一半。
+- 容易忘：边界更新要排除 `mid`（用 `mid+1` / `mid-1`），名字比较用 `strcmp`。
 
 ```c
-int left = 0;
-int right = n - 1;
-
+int left = 0, right = n - 1;
 while (left <= right) {
   int mid = (left + right) / 2;
-
-  if (arr[mid] == target) {
-    return mid;
-  } else if (arr[mid] < target) {
-    left = mid + 1;
-  } else {
-    right = mid - 1;
-  }
+  if (arr[mid] == target) return mid;
+  else if (arr[mid] < target) left = mid + 1;
+  else right = mid - 1;
 }
-
 return -1;
 ```
-- 如果查名字：
-
-```c
-int cmp = strcmp(names[mid], target);
-
-if (cmp == 0) {
-  return mid;
-} else if (cmp < 0) {
-  left = mid + 1;
-} else {
-  right = mid - 1;
-}
-```
-- 我自己的记忆句：
-  - 比中间大，去右边。
-  - 比中间小，去左边。
-  - 每次都把范围砍一半。
-
-### 02_merge_sort
-
-- 已通过。
-- 重点：分治，递归拆分后在线性时间内合并两个有序段。
-- 容易忘：合并后把剩余元素补齐，临时数组边界别写错。
-
-### 08_circular_queue
-
-- 已通过。
-- 重点：用取模实现“首尾相接”，`front/rear` 更新要统一。
-- 容易忘：判空判满的定义必须和实现一致（通常预留一个空位）。
-
-### 13_universal_sorter
-
-- 已通过。
-- 重点：把比较函数参数化，让同一套排序流程支持多种类型/规则。
-- 容易忘：比较函数返回值语义（小于/等于/大于）要全程一致。
-
-### 15_url_parser
-
-- 已通过。
-- 重点：先按结构拆字段，再校验每段合法性。
-- 容易忘：无端口、无路径、带查询参数这些分支。
-
-### 16_mysed
-
-- 已通过。
-- 重点：按行读取并执行替换逻辑，保证输出稳定。
-- 容易忘：只替换首个匹配还是全替换，要严格按题意。
-
-### 17_myfile
-
-- 已通过。
-- 重点：文件读写、定位、错误处理返回码要完整。
-- 容易忘：系统调用失败时要及时返回，不能继续使用无效句柄。
-
-### 18_mywc
-
-- 已通过。
-- 重点：字符/单词/行计数状态清晰，规则和标准行为对齐。
-- 容易忘：最后一行没有换行符时，行数统计是否正确。
 
 ### 06_stack_maze
 
-- 已通过。
-- 重点：
-  - `visited` 防止重复走。
-  - 栈保存当前路径。
-  - 找不到下一步就弹栈回退。
-- 容易忘：测试可能会要求特定的方向顺序和路径输出顺序。
-- 实现思路：
-  - 起点先入栈并标记访问。
-  - 每轮只看栈顶位置。
-  - 按固定方向顺序找下一个可走点。
-  - 找到就压栈，找不到就 `top--` 回退。
-  - 终点到达后，直接从栈顶往栈底打印路径。
-- 代码记忆：
+- 重点：`visited` 防重复，栈保存当前路径，走不通弹栈回退。
+- 容易忘：测试可能要求特定方向顺序。
 
 ```c
 visited[0][0] = 1;
 stack[++top] = (Pos){0, 0};
-
 while (top != -1) {
-    int row_cur = stack[top].row;
-    int col_cur = stack[top].col;
-    int found = 0;
-
-    if (stack[top].row == MAX_ROW - 1 && stack[top].col == MAX_COL - 1) {
-        break;
-    }
-
-    if (/* 下一个点可走 */) {
-        stack[++top] = next;
-        visited[next.row][next.col] = 1;
-        found = 1;
-    }
-
-    if (!found) {
-        top--;
-    }
+    if (/* 到终点 */) break;
+    if (/* 下一个点可走 */) { stack[++top] = next; visited[...] = 1; found = 1; }
+    if (!found) top--;
 }
 ```
-- 我自己的记忆句：
-  - 栈里装的是“当前路径”。
-  - DFS 是“能前进就压栈，不能前进就弹栈”。
 
 ### 07_queue_maze
 
-- 已通过。
-- 重点：
-  - 队列保存待扩展节点。
-  - BFS 第一次到终点就是最短路。
-  - `parent` 记录前驱，用来回溯路径。
-- 容易忘：队列不是路径本身，路径要靠 `parent` 倒推。
-- 实现思路：
-  - 起点入队，`visited` 标记起点。
-  - 每次从队头取一个点，扩展它的四个方向。
-  - 只要是合法新点，就立刻标记访问、记录 `parent`、然后入队。
-  - 第一次取到终点时，就已经保证是最短路。
-  - 最后从终点沿 `parent` 一路回溯到起点。
-- 代码记忆：
+- 重点：BFS 第一次到终点就是最短路，路径靠 `parent` 倒推。
+- 容易忘：队列里放的是"待处理的点"，不是路径本身。
 
 ```c
 queue[rear++] = (Pos){0, 0};
 visited[0][0] = 1;
-
 while (front != rear) {
     Pos cur = queue[front++];
-
-    if (cur.row == MAX_ROW - 1 && cur.col == MAX_COL - 1) {
-        found = 1;
-        break;
-    }
-
-    if (/* next 合法且未访问 */) {
-        visited[next.row][next.col] = 1;
-        parent[next.row][next.col] = cur;
-        queue[rear++] = next;
-    }
+    if (/* 到终点 */) { found = 1; break; }
+    // 扩展四方向，记录 parent，入队
 }
-```
-- 回溯记忆：
-
-```c
+// 从终点沿 parent 回溯
 while (cur.row != 0 || cur.col != 0) {
     path[length++] = cur;
     cur = parent[cur.row][cur.col];
 }
-path[length++] = (Pos){0, 0};
 ```
-- 我自己的记忆句：
-  - 队列里放的是“待处理的点”，不是路径。
-  - BFS 的路径要靠 `parent` 倒着找回来。
+
+### 08_circular_queue
+
+- 重点：用取模实现首尾相接，`front/rear` 更新要统一。
+- 容易忘：判空判满定义必须和实现一致（通常预留一个空位）。
 
 ### 09_word_counter
 
-- 已通过。
-- 重点：扫描文本时明确“什么时候开始计数，什么时候结束一个单词”。
-- 容易忘：空格、换行、制表符这些边界。
-- 实现记忆：
+- 重点：明确"何时开始一个单词，何时结束"。
+- 容易忘：空格、换行、制表符都是分隔符。
 
 ```c
-if (isspace(ch)) {
-  in_word = 0;
-} else if (!in_word) {
-  count++;
-  in_word = 1;
-}
+if (isspace(ch)) in_word = 0;
+else if (!in_word) { count++; in_word = 1; }
 ```
 
 ### 10_my_strcpy
 
-- 已通过。
-- 重点：一个字符一个字符复制。
-- 容易忘：最后必须补字符串结束符 `\0`。
-- 实现记忆：
+- 重点：逐字符拷贝，最后补 `\0`。
 
 ```c
 int i = 0;
-while (src[i] != '\0') {
-  dest[i] = src[i];
-  i++;
-}
+while (src[i] != '\0') { dest[i] = src[i]; i++; }
 dest[i] = '\0';
 ```
 
 ### 11_command_interpreter
 
-- 已通过。
-- 重点：命令解析常常可以看成状态机。
-- 容易忘：字符串结束符 `\0` 也是一个边界条件。
-- 实现思路：
-  - `OUT_WORD` 状态：跳过空格，等待新单词开始。
-  - `IN_WORD` 状态：扫描当前单词，直到遇到空格或 `\0`。
-  - 开始单词时记录 `argv[argc++] = &buf[i]`。
-  - 结束单词时把分隔符改成 `\0`。
-- 代码记忆：
+- 重点：状态机解析，`OUT_WORD` / `IN_WORD` 两个状态。
+- 容易忘：`\0` 也是边界，结束单词时把分隔符改成 `\0`。
 
 ```c
 if (state == OUT_WORD) {
-  if (ch != ' ' && ch != '\t' && ch != '\0') {
-    argv[argc++] = &buf[i];
-    state = IN_WORD;
-  }
+  if (ch != ' ' && ch != '\t' && ch != '\0') { argv[argc++] = &buf[i]; state = IN_WORD; }
 } else {
-  if (ch == ' ' || ch == '\t') {
-    buf[i] = '\0';
-    state = OUT_WORD;
-  }
+  if (ch == ' ' || ch == '\t') { buf[i] = '\0'; state = OUT_WORD; }
 }
 ```
 
 ### 12_student_management
 
-- 已通过。
-- 重点：结构体管理、遍历查找、插入删除。
-- 容易忘：删除时后面的元素要前移。
-- 实现记忆：
+- 重点：结构体数组管理，删除时后面的元素要前移。
 
 ```c
-for (int i = pos; i < count - 1; i++) {
-  students[i] = students[i + 1];
-}
+for (int i = pos; i < count - 1; i++) students[i] = students[i + 1];
 count--;
 ```
 
+### 13_universal_sorter
+
+- 重点：比较函数参数化，返回值语义（负/零/正）全程一致。
+
 ### 14_calculator
 
-- 已通过。
-- 重点：根据输入选择运算分支。
-- 容易忘：输入合法性和除零这种边界。
-- 实现记忆：
+- 重点：`switch` 分发运算，注意除零。
+
+### 15_url_parser
+
+- 重点：先按结构拆字段，再校验每段；注意无端口、无路径等分支。
+
+### 16_mysed
+
+- 重点：按行读取并执行替换，是否替换全部匹配按题意来。
+
+### 17_myfile
+
+- 重点：文件读写、定位、错误处理返回码要完整，失败时不能继续用无效句柄。
+
+### 18_mywc
+
+- 重点：字符/单词/行计数状态清晰；最后一行无换行符时行数要对。
+
+### 21_singly_linked_list_josephus
+
+- 重点：单链表约瑟夫环，删节点前先 `link next = next_wrap(current)`，再 `delete(current)`，再 `current = next`。
+- 容易忘：`next_wrap` 依赖 `traverse` 找头节点，删完节点后链表结构变化但仍能正确找头。
+
+### 22_doubly_circular_queue
+
+- 重点：双向环形队列，入队/出队时前后指针都要同步更新。
+
+### 23_circular_linked_list_josephus
+
+- 重点：环形链表，删节点时 `prev->next = next` 维护链路，`prev` 必须始终是 `current` 的前驱。
+- 容易忘：`prev` 要跟着 `current` 一起走，每步报数都要同步移动。
 
 ```c
-switch (op) {
-case '+': printf("%d\n", a + b); break;
-case '-': printf("%d\n", a - b); break;
-case '*': printf("%d\n", a * b); break;
-case '/':
-  if (b != 0) printf("%d\n", a / b);
-  break;
-}
+for (int i = 0; i < m - 1; ++i) { prev = current; current = current->next; }
+Node* next = current->next;
+prev->next = next;
+free(current);
+current = next;
 ```
 
-## 当前未通过练习
+### 27_asm_gcd
 
-还没通过的题目：
+- 重点：内联汇编 `asm` 实现辗转相除，注意输入/输出/破坏寄存器约束。
 
-- `19_mytrans`
-- `20_mybash`
-- `21_singly_linked_list_josephus`
-- `22_doubly_circular_queue`
-- `23_circular_linked_list_josephus`
-- `24_prev_binary_tree`
-- `25_counter_letter`
-- `26_hash_counter`
-- `27_asm_gcd`
-- `28_operator_overflow`
-- `29_swap_endian`
-- `30_debug_print`
-- `31_event_handler`
-- `32_container_of_macro`
-- `33_garray_dynamic_array`
-- `34_protocol_header_parser`
-- `35_elf_info_parser`
-- `36_lru_cache`
-- `37_bitmap_operations`
-- `38_thread_safe_ring_buffer`
-- `39_strtok_r_thread_safe`
-- `40_bloom_filter_bitmap`
+### 28_operator_overflow
+
+- 重点：无符号整数各运算的溢出判断条件。
+  - 加法：`a + b < a`
+  - 减法：`a - b > a`
+  - 乘法：`b != 0 && a * b / b != a`
+  - 除法：除零视为溢出
+
+### 29_swap_endian
+
+- 重点：位操作字节序翻转。
+
+```c
+uint32_t swap = ((x & 0xFF) << 24) | ((x & 0xFF00) << 8)
+              | ((x >> 8) & 0xFF00) | ((x >> 24) & 0xFF);
+```
+
+### 31_event_handler
+
+- 重点：函数指针数组做事件分发，用 `typedef void (*Handler)(void)` 等定义类型。
+
+### 33_garray_dynamic_array
+
+- 重点：`realloc` 扩容，`void*` + 元素字节大小实现泛型，`memcpy` 追加元素。
+- 容易忘：偏移计算 `(char*)arr->data + arr->len * arr->elem_size`。
 
 ## 做题前提醒
 
-每次开始新题前，先问自己这几件事：
+每次开始新题前，先问自己：
 
-1. 测试到底要什么输出格式。
-2. 这题核心数据结构是什么：数组、栈、队列、链表、哈希还是树。
-3. 有没有明显边界条件：空输入、越界、`\0`、起点终点、数组长度。
-4. 如果是路径题：测试要的是起点到终点，还是终点到起点。
-5. 如果是 BFS：队列不是路径，记得想清楚 `parent` 怎么存。
+1. 测试到底要什么输出格式？
+2. 核心数据结构是什么：数组、栈、队列、链表、哈希还是树？
+3. 有没有明显边界条件：空输入、越界、`\0`、起点终点、数组长度？
+4. 如果是链表题：删节点时有没有维护前驱？
+5. 如果是 BFS：队列不是路径，`parent` 怎么存？
 6. 如果是 DFS：栈里装的是当前路径，不是所有访问点。
-7. 如果是二分查找：先确认数据是不是有序，再写 `left/right/mid`。
+7. 如果是二分查找：先确认数据有序，再写 `left/right/mid`。
 
 ## 建议下一批练习
 
-按现在的学习连续性，下一批最适合继续做的是：
-
-1. `19_mytrans`
+1. `19_mytrans`（进行中）
 2. `20_mybash`
-3. `21_singly_linked_list_josephus`
-4. `22_doubly_circular_queue`
-
-## 之后继续更新的方法
-
-以后每过一题，就补这几行：
-
-```md
-### 题号_题目
-
-- 已通过。
-- 重点：
-- 容易忘：
-```
+3. `24_prev_binary_tree`（有 segfault 要修）
+4. `25_counter_letter`
+5. `26_hash_counter`
