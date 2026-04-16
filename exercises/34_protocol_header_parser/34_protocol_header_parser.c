@@ -19,7 +19,10 @@
  */
 typedef struct {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    uint8_t  version_hi;  // 字节0
+    uint8_t  version_lo;  // 字节1
+    uint16_t length_be;   // 字节2-3（大端）
+    uint8_t  flags_raw;   // 字节4
 } proto_header_raw_t;
 
 /*
@@ -28,7 +31,11 @@ typedef struct {
  */
 typedef struct {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    uint8_t  ver_major : 4;
+    uint8_t  ver_minor : 4;
+    uint16_t length;
+    uint8_t  reserved  : 3;
+    uint8_t  flags     : 5;
 } proto_header_bits_t;
 
 #pragma pack(pop)
@@ -38,7 +45,7 @@ typedef struct {
  */
 static uint16_t be16_to_cpu(uint16_t be) {
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    return ( ( (be & 0xFF00) >> 8 ) | ( (be & 0x00FF) << 8));
 }
 
 int main(void) {
@@ -51,7 +58,8 @@ int main(void) {
 
     /* 解析版本号：题目定义“4 位主版本 + 4 位次版本”，位于版本字段的低 8 位 */
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    uint8_t raw_verion_major = (raw.version_lo >> 4) & 0x0f;
+    uint8_t raw_verion_minor = (raw.version_lo) & 0x0f;
 
     /* 解析长度：网络序 16 位 */
     uint16_t length = be16_to_cpu(raw.length_be);
@@ -61,8 +69,12 @@ int main(void) {
 
     /* 使用位域结构体表达（非内存映射，仅用于说明位域解析规则） */
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    proto_header_bits_t view;
+    view.ver_major = raw_verion_major;
+    view.ver_minor = raw_verion_minor;
 
+    view.length = length;
+    view.flags = flags;
     /* 期望输出：version:0.3, length:32, flags:0x00 */
     printf("version:%u.%u, length:%u, flags:0x%02X\n", view.ver_major, view.ver_minor, view.length, view.flags & 0xFFu);
 
