@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 统计时间：`2026-04-15`
+- 统计时间：`2026-04-20`
 - 总题数：`40`
-- 已通过：`26`
-- 未完成：`14`
-- 当前得分：`130 / 200`
+- 已通过：`34`
+- 未完成：`6`
+- 当前得分：`170 / 200`
 
 ## 当前已通过练习
 
@@ -32,30 +32,30 @@
 | 16 | `16_mysed` | 按规则逐行处理，替换时注意匹配范围 |
 | 17 | `17_myfile` | 文件操作要检查返回值，错误路径也要覆盖 |
 | 18 | `18_mywc` | 统计逻辑与输入边界（空文件、最后一行）要一致 |
+| 19 | `19_mytrans` | 字符转换逐字符处理，注意大小写和特殊字符边界 |
 | 21 | `21_singly_linked_list_josephus` | 单链表模拟约瑟夫环，删节点时先保存 next，再 free |
 | 22 | `22_doubly_circular_queue` | 双向环形队列，注意前后指针的更新顺序 |
 | 23 | `23_circular_linked_list_josephus` | 环形链表删节点必须用 prev 维护前驱，否则链表断链 |
+| 24 | `24_prev_binary_tree` | 二叉树前序遍历，注意递归边界和空节点处理 |
+| 25 | `25_counter_letter` | 字母频率统计，26个桶分别计数 |
+| 26 | `26_hash_counter` | 哈希表统计词频；`strdup` 在 `-std=c11` 下需要 `#define _POSIX_C_SOURCE 200809L` |
 | 27 | `27_asm_gcd` | 内联汇编实现辗转相除法，注意寄存器约束 |
 | 28 | `28_operator_overflow` | 无符号整数加减乘除的溢出检测 |
 | 29 | `29_swap_endian` | 位操作交换字节序，`((x >> 24) & 0xFF)` 等四段组合 |
+| 30 | `30_debug_print` | 宏实现调试打印，`__FILE__`、`__LINE__`、`__func__` 的使用 |
 | 31 | `31_event_handler` | 函数指针数组实现事件回调分发 |
+| 32 | `32_container_of_macro` | `container_of` 宏：通过成员指针反推结构体指针，用 `offsetof` 计算偏移 |
 | 33 | `33_garray_dynamic_array` | `realloc` 扩容，`void*` 泛型，`memcpy` 拷贝元素 |
+| 34 | `34_protocol_header_parser` | 按字段偏移解析二进制协议头，注意字节序和位域 |
+| 37 | `37_bitmap_operations` | 位图操作：`set/clear/test` 用位运算，注意字节下标和位下标 |
 
 ## 当前未通过 / 未完成练习
 
 | 题号 | 题目 | 备注 |
 | --- | --- | --- |
-| 19 | `19_mytrans` | 进行中 |
 | 20 | `20_mybash` | 未开始 |
-| 24 | `24_prev_binary_tree` | 有 segfault，需要修 |
-| 25 | `25_counter_letter` | 未开始 |
-| 26 | `26_hash_counter` | 未开始 |
-| 30 | `30_debug_print` | 未开始 |
-| 32 | `32_container_of_macro` | 未开始 |
-| 34 | `34_protocol_header_parser` | 未开始 |
 | 35 | `35_elf_info_parser` | 未开始 |
 | 36 | `36_lru_cache` | 未开始 |
-| 37 | `37_bitmap_operations` | 未开始 |
 | 38 | `38_thread_safe_ring_buffer` | 未开始 |
 | 39 | `39_strtok_r_thread_safe` | 未开始 |
 | 40 | `40_bloom_filter_bitmap` | 未开始 |
@@ -231,6 +231,11 @@ count--;
 
 - 重点：字符/单词/行计数状态清晰；最后一行无换行符时行数要对。
 
+### 19_mytrans
+
+- 重点：字符转换逐字符处理，明确转换规则的覆盖范围。
+- 容易忘：大小写互转用 `toupper`/`tolower`，非字母字符保持不变。
+
 ### 21_singly_linked_list_josephus
 
 - 重点：单链表约瑟夫环，删节点前先 `link next = next_wrap(current)`，再 `delete(current)`，再 `current = next`。
@@ -253,6 +258,21 @@ free(current);
 current = next;
 ```
 
+### 24_prev_binary_tree
+
+- 重点：前序遍历顺序是 根 → 左 → 右，递归时先处理当前节点再向下走。
+- 容易忘：空节点（`NULL`）是递归终止条件，必须检查。
+
+### 25_counter_letter
+
+- 重点：26 个桶 `count['z'-'a']`，字母转小写后统一计数。
+- 容易忘：非字母字符跳过，不要计入任何桶。
+
+### 26_hash_counter
+
+- 重点：哈希表统计词频，`insert` 时先查找是否存在，存在则 `count++`，不存在才创建新节点（`count=1`）。
+- 坑：`strdup` 不是 C11 标准函数，用 `-std=c11` 编译时需要在文件顶部加 `#define _POSIX_C_SOURCE 200809L`，否则返回值被当 `int` 处理导致段错误。
+
 ### 27_asm_gcd
 
 - 重点：内联汇编 `asm` 实现辗转相除，注意输入/输出/破坏寄存器约束。
@@ -274,14 +294,34 @@ uint32_t swap = ((x & 0xFF) << 24) | ((x & 0xFF00) << 8)
               | ((x >> 8) & 0xFF00) | ((x >> 24) & 0xFF);
 ```
 
+### 30_debug_print
+
+- 重点：用宏实现调试输出，`__FILE__`、`__LINE__`、`__func__` 是编译器内置宏。
+- 容易忘：`do { ... } while(0)` 包裹宏体，避免 if-else 时出现语法问题。
+
 ### 31_event_handler
 
 - 重点：函数指针数组做事件分发，用 `typedef void (*Handler)(void)` 等定义类型。
+
+### 32_container_of_macro
+
+- 重点：`container_of(ptr, type, member)` = `(type *)((char*)(ptr) - offsetof(type, member))`。
+- 容易忘：`offsetof` 在 `<stddef.h>` 中，强转为 `char*` 再减偏移是关键。
 
 ### 33_garray_dynamic_array
 
 - 重点：`realloc` 扩容，`void*` + 元素字节大小实现泛型，`memcpy` 追加元素。
 - 容易忘：偏移计算 `(char*)arr->data + arr->len * arr->elem_size`。
+
+### 34_protocol_header_parser
+
+- 重点：按固定偏移读取二进制字段，注意网络字节序转换（`ntohs`/`ntohl`）。
+- 容易忘：结构体可能有对齐 padding，直接强转指针比结构体更可靠。
+
+### 37_bitmap_operations
+
+- 重点：位图的三个核心操作：`set`（`|=`）、`clear`（`&= ~`）、`test`（`&`）。
+- 容易忘：字节下标 `index / 8`，位下标 `index % 8`，两者不要搞混。
 
 ## 做题前提醒
 
@@ -297,8 +337,9 @@ uint32_t swap = ((x & 0xFF) << 24) | ((x & 0xFF00) << 8)
 
 ## 建议下一批练习
 
-1. `19_mytrans`（进行中）
-2. `20_mybash`
-3. `24_prev_binary_tree`（有 segfault 要修）
-4. `25_counter_letter`
-5. `26_hash_counter`
+1. `20_mybash`（shell 实现，难度较高，建议先搞清楚 `fork`/`exec`/`pipe`）
+2. `35_elf_info_parser`（ELF 文件格式解析）
+3. `36_lru_cache`（哈希表 + 双向链表）
+4. `38_thread_safe_ring_buffer`（环形缓冲 + 互斥锁）
+5. `39_strtok_r_thread_safe`（线程安全字符串分割）
+6. `40_bloom_filter_bitmap`（布隆过滤器，位图应用）
