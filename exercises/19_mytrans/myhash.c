@@ -56,8 +56,13 @@ int hash_table_insert(HashTable *table, const char *key, const char *value) {
   unsigned long hash = hash_function(key) % HASH_TABLE_SIZE;
   HashNode *node = table->buckets[hash];
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+  // TODO: 在这里添加你的代码
+  HashNode *new_node = malloc(sizeof(HashNode));
+  new_node->key = strdup(key);
+  new_node->value = strdup(value);
+
+  new_node->next = node;
+  table->buckets[hash] = new_node;
 
   return 1;
 }
@@ -71,7 +76,14 @@ const char *hash_table_lookup(HashTable *table, const char *key) {
   HashNode *node = table->buckets[hash];
 
     // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+  while(node != NULL) {
+    if(strcmp(node->key, key) == 0) {
+      return node->value;
+    }
+    else {
+      node = node->next;
+    }
+  }
 
   return NULL; // 未找到
 }
