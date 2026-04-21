@@ -1,345 +1,350 @@
-# 练习记录
+# 练习进度笔记
 
-这份文件用来记录当前已经通过的练习、各题核心知识点，以及继续做题前值得先看的提醒。
+> 统计时间：`2026-04-21` | 总题数：`40` | 已通过：`36` | 未完成：`4` | 得分：`180 / 200`
+>
+> 进度：`████████████████████████████████████░░░░` 90%
 
-## 当前状态
+---
 
-- 统计时间：`2026-04-20`
-- 总题数：`40`
-- 已通过：`34`
-- 未完成：`6`
-- 当前得分：`170 / 200`
+## 一、总览
 
-## 当前已通过练习
+### ✅ 已通过（36 / 40）
 
-| 题号 | 题目 | 我应该记住什么 |
-| --- | --- | --- |
-| 01 | `01_insert_sort` | 插入排序的核心是"前面保持有序，把当前元素插进去" |
-| 02 | `02_merge_sort` | 先拆分再合并，合并时用双指针保证有序 |
-| 03 | `03_quick_sort` | 快速排序的关键是分区，递归处理左右子区间 |
-| 04 | `04_linear_search` | 线性查找就是从头到尾逐个比较 |
-| 05 | `05_binary_search` | 只对有序数据生效，关键是正确更新边界 |
-| 06 | `06_stack_maze` | DFS 用栈，栈里存当前路径，走不通就回退 |
-| 07 | `07_queue_maze` | BFS 用队列，`parent` 用来回溯最短路径 |
-| 08 | `08_circular_queue` | 环形队列用取模回绕，重点是判空判满条件 |
-| 09 | `09_word_counter` | 核心是逐字符扫描并统计 |
-| 10 | `10_my_strcpy` | 指针或下标拷贝字符串，记得补 `\0` |
-| 11 | `11_command_interpreter` | 状态机解析参数时，开始位置和结束位置都要想清楚 |
-| 12 | `12_student_management` | 结构体数组 + 查找/增加/删除逻辑 |
-| 13 | `13_universal_sorter` | 把"比较逻辑"抽出来，排序流程可复用 |
-| 14 | `14_calculator` | 输入解析和运算分发要稳定 |
-| 15 | `15_url_parser` | 先切协议/主机/路径，再处理端口和边界 |
-| 16 | `16_mysed` | 按规则逐行处理，替换时注意匹配范围 |
-| 17 | `17_myfile` | 文件操作要检查返回值，错误路径也要覆盖 |
-| 18 | `18_mywc` | 统计逻辑与输入边界（空文件、最后一行）要一致 |
-| 19 | `19_mytrans` | 字符转换逐字符处理，注意大小写和特殊字符边界 |
-| 21 | `21_singly_linked_list_josephus` | 单链表模拟约瑟夫环，删节点时先保存 next，再 free |
-| 22 | `22_doubly_circular_queue` | 双向环形队列，注意前后指针的更新顺序 |
-| 23 | `23_circular_linked_list_josephus` | 环形链表删节点必须用 prev 维护前驱，否则链表断链 |
-| 24 | `24_prev_binary_tree` | 二叉树前序遍历，注意递归边界和空节点处理 |
-| 25 | `25_counter_letter` | 字母频率统计，26个桶分别计数 |
-| 26 | `26_hash_counter` | 哈希表统计词频；`strdup` 在 `-std=c11` 下需要 `#define _POSIX_C_SOURCE 200809L` |
-| 27 | `27_asm_gcd` | 内联汇编实现辗转相除法，注意寄存器约束 |
-| 28 | `28_operator_overflow` | 无符号整数加减乘除的溢出检测 |
-| 29 | `29_swap_endian` | 位操作交换字节序，`((x >> 24) & 0xFF)` 等四段组合 |
-| 30 | `30_debug_print` | 宏实现调试打印，`__FILE__`、`__LINE__`、`__func__` 的使用 |
-| 31 | `31_event_handler` | 函数指针数组实现事件回调分发 |
-| 32 | `32_container_of_macro` | `container_of` 宏：通过成员指针反推结构体指针，用 `offsetof` 计算偏移 |
-| 33 | `33_garray_dynamic_array` | `realloc` 扩容，`void*` 泛型，`memcpy` 拷贝元素 |
-| 34 | `34_protocol_header_parser` | 按字段偏移解析二进制协议头，注意字节序和位域 |
-| 37 | `37_bitmap_operations` | 位图操作：`set/clear/test` 用位运算，注意字节下标和位下标 |
+| 题号 | 题目 | 分类 | 核心要点 |
+| :--: | --- | :--: | --- |
+| 01 | `01_insert_sort` | 排序 | 保持前段有序，把当前元素向前插入 |
+| 02 | `02_merge_sort` | 排序 | 分治递归拆分，合并时双指针保证有序 |
+| 03 | `03_quick_sort` | 排序 | 分区（partition）后递归处理左右子区间 |
+| 04 | `04_linear_search` | 查找 | 从头扫到尾，找到即返回 |
+| 05 | `05_binary_search` | 查找 | 只对有序数据有效，边界更新用 `mid±1` |
+| 06 | `06_stack_maze` | 数据结构 | DFS，栈保存当前路径，走不通弹栈回退 |
+| 07 | `07_queue_maze` | 数据结构 | BFS，第一次到终点即最短路，`parent` 倒推路径 |
+| 08 | `08_circular_queue` | 数据结构 | 取模回绕，判空判满定义与实现必须一致 |
+| 09 | `09_word_counter` | 字符串 | 明确"何时开始 / 结束一个单词"，空白字符都是分隔符 |
+| 10 | `10_my_strcpy` | 字符串 | 逐字符拷贝，最后补 `\0` |
+| 11 | `11_command_interpreter` | 字符串 | 状态机（`OUT_WORD`/`IN_WORD`），`\0` 也是边界 |
+| 12 | `12_student_management` | 数据结构 | 结构体数组，删除时后续元素前移 |
+| 13 | `13_universal_sorter` | 排序 | 比较函数参数化，返回值语义（负/零/正）全程一致 |
+| 14 | `14_calculator` | 数据结构 | `switch` 分发运算，注意除零处理 |
+| 15 | `15_url_parser` | 字符串 | 先拆协议/主机/路径，再处理端口和边界分支 |
+| 16 | `16_mysed` | 文件 | 按行读取并执行替换，是否全局替换按题意来 |
+| 17 | `17_myfile` | 文件 | 文件读写检查返回值，失败时不能继续用无效句柄 |
+| 18 | `18_mywc` | 文件 | 字符/单词/行计数状态清晰；最后一行无换行符时行数要对 |
+| 19 | `19_mytrans` | 字符串 | 逐字符转换，`toupper`/`tolower`，非字母保持不变 |
+| 21 | `21_singly_linked_list_josephus` | 链表 | 删节点前先保存 `next`，再 `free`，再移动 |
+| 22 | `22_doubly_circular_queue` | 链表 | 双向环形队列，入队出队时前后指针同步更新 |
+| 23 | `23_circular_linked_list_josephus` | 链表 | `prev->next = next` 维护链路，`prev` 必须跟着 `current` 走 |
+| 24 | `24_prev_binary_tree` | 树 | 前序：根 → 左 → 右；`NULL` 是递归终止条件 |
+| 25 | `25_counter_letter` | 字符串 | 26 个桶 `count[ch - 'a']`，非字母跳过 |
+| 26 | `26_hash_counter` | 数据结构 | 哈希表统计词频；⚠️ `strdup` 需要 `#define _POSIX_C_SOURCE 200809L` |
+| 27 | `27_asm_gcd` | 底层 | 内联汇编约束：输入/输出/破坏寄存器要写全 |
+| 28 | `28_operator_overflow` | 底层 | 加：`a+b < a`；减：`a-b > a`；乘：`a*b/b != a`；除零溢出 |
+| 29 | `29_swap_endian` | 底层 | 位操作四段组合翻转字节序 |
+| 30 | `30_debug_print` | 底层 | `__FILE__`/`__LINE__`/`__func__`；宏体用 `do { } while(0)` 包裹 |
+| 31 | `31_event_handler` | 底层 | `typedef void (*Handler)(void)` 函数指针数组做事件分发 |
+| 32 | `32_container_of_macro` | 底层 | `(type *)((char*)(ptr) - offsetof(type, member))`；`offsetof` 在 `<stddef.h>` |
+| 33 | `33_garray_dynamic_array` | 数据结构 | `realloc` 扩容，`void*` 泛型，`memcpy` 追加元素 |
+| 34 | `34_protocol_header_parser` | 底层 | 按固定偏移读取二进制字段，`ntohs`/`ntohl` 转字节序 |
+| 35 | `35_elf_info_parser` | 二进制 | ELF 节头表按偏移解析，注意字节序和 `e_shoff`/`e_shentsize`/`e_shnum` |
+| 37 | `37_bitmap_operations` | 底层 | `set`（`\|=`）、`clear`（`&= ~`）、`test`（`&`）；字节下标 `i/8`，位下标 `i%8` |
+| 38 | `38_thread_safe_ring_buffer` | 并发 | mutex + 条件变量；`cond_wait` 用 `while` 防虚假唤醒；push/pop 封装临界区 |
 
-## 当前未通过 / 未完成练习
+### ⏳ 待完成（4 / 40）
 
-| 题号 | 题目 | 备注 |
-| --- | --- | --- |
-| 20 | `20_mybash` | 未开始 |
-| 35 | `35_elf_info_parser` | 未开始 |
-| 36 | `36_lru_cache` | 未开始 |
-| 38 | `38_thread_safe_ring_buffer` | 未开始 |
-| 39 | `39_strtok_r_thread_safe` | 未开始 |
-| 40 | `40_bloom_filter_bitmap` | 未开始 |
+| 题号 | 题目 | 分类 | 关键前置知识 |
+| :--: | --- | :--: | --- |
+| 20 | `20_mybash` | 系统 | `fork` / `exec` / `pipe` / `waitpid` |
+| 36 | `36_lru_cache` | 数据结构 | 哈希表 + 双向链表组合 |
+| 39 | `39_strtok_r_thread_safe` | 字符串 | 可重入 strtok，`saveptr` 机制 |
+| 40 | `40_bloom_filter_bitmap` | 位图 | 多哈希函数 + 位图 `set`/`test` |
 
-## 每题简记
+---
 
-### 01_insert_sort
+## 二、每题详细笔记
 
-- 重点：把当前元素插入到前面已经有序的部分。
-- 容易忘：内层循环是在"挪位置"，不是直接乱换。
+### 01 插入排序
+
+内层循环是在**挪位置**，不是直接交换，最后再填入 `key`。
 
 ```c
 for (int i = 1; i < n; i++) {
-  int key = arr[i];
-  int j = i - 1;
-  while (j >= 0 && arr[j] > key) {
-    arr[j + 1] = arr[j];
-    j--;
-  }
-  arr[j + 1] = key;
+    int key = arr[i], j = i - 1;
+    while (j >= 0 && arr[j] > key) { arr[j + 1] = arr[j]; j--; }
+    arr[j + 1] = key;
 }
 ```
 
-### 02_merge_sort
+### 02 归并排序
 
-- 重点：分治，递归拆分后在线性时间内合并两个有序段。
-- 容易忘：合并后把剩余元素补齐，临时数组边界别写错。
+合并后要把剩余元素补进去，临时数组边界别写错。
 
-### 03_quick_sort
+### 03 快速排序
 
-- 重点：先分区，再递归。
-- 容易忘：基准值、左右指针移动、递归边界。
+先分区，再递归；基准值取 `arr[right]`，交换后基准落定，递归不包含基准。
 
 ```c
-int pivot = arr[right];
-int i = left - 1;
-for (int j = left; j < right; j++) {
-  if (arr[j] < pivot) { i++; swap(&arr[i], &arr[j]); }
-}
+int pivot = arr[right], i = left - 1;
+for (int j = left; j < right; j++)
+    if (arr[j] < pivot) { i++; swap(&arr[i], &arr[j]); }
 swap(&arr[i + 1], &arr[right]);
+// 递归：[left, i]  [i+2, right]
 ```
 
-### 04_linear_search
-
-- 重点：从头扫到尾，找到就返回，找不到返回失败值。
+### 04 线性查找
 
 ```c
-for (int i = 0; i < n; i++) {
-  if (arr[i] == target) return i;
-}
+for (int i = 0; i < n; i++) if (arr[i] == target) return i;
 return -1;
 ```
 
-### 05_binary_search
+### 05 二分查找
 
-- 重点：只能用于有序数据，每次把范围砍一半。
-- 容易忘：边界更新要排除 `mid`（用 `mid+1` / `mid-1`），名字比较用 `strcmp`。
+边界更新用 `mid±1`；字符串比较用 `strcmp`，不能用 `==`。
 
 ```c
 int left = 0, right = n - 1;
 while (left <= right) {
-  int mid = (left + right) / 2;
-  if (arr[mid] == target) return mid;
-  else if (arr[mid] < target) left = mid + 1;
-  else right = mid - 1;
+    int mid = (left + right) / 2;
+    if (arr[mid] == target) return mid;
+    else if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
 }
 return -1;
 ```
 
-### 06_stack_maze
+### 06 栈迷宫（DFS）
 
-- 重点：`visited` 防重复，栈保存当前路径，走不通弹栈回退。
-- 容易忘：测试可能要求特定方向顺序。
+`visited` 防重复，走不通弹栈；注意测试可能要求特定方向顺序。
 
 ```c
-visited[0][0] = 1;
-stack[++top] = (Pos){0, 0};
+visited[0][0] = 1; stack[++top] = (Pos){0, 0};
 while (top != -1) {
+    int found = 0;
     if (/* 到终点 */) break;
-    if (/* 下一个点可走 */) { stack[++top] = next; visited[...] = 1; found = 1; }
-    if (!found) top--;
+    // 按顺序试探方向
+    if (/* 下一点可走 */) { stack[++top] = next; visited[r][c] = 1; found = 1; break; }
+    if (!found) top--;  // 回退
 }
 ```
 
-### 07_queue_maze
+### 07 队列迷宫（BFS）
 
-- 重点：BFS 第一次到终点就是最短路，路径靠 `parent` 倒推。
-- 容易忘：队列里放的是"待处理的点"，不是路径本身。
+队列存待处理的**点**，不是路径；`parent` 记录每个点怎么来的，最后倒推。
 
 ```c
-queue[rear++] = (Pos){0, 0};
-visited[0][0] = 1;
+queue[rear++] = start; visited[0][0] = 1;
 while (front != rear) {
     Pos cur = queue[front++];
     if (/* 到终点 */) { found = 1; break; }
-    // 扩展四方向，记录 parent，入队
+    // 扩展四方向，parent[nr][nc] = cur，入队
 }
-// 从终点沿 parent 回溯
-while (cur.row != 0 || cur.col != 0) {
-    path[length++] = cur;
-    cur = parent[cur.row][cur.col];
-}
+// 回溯路径
+while (cur != start) { path[len++] = cur; cur = parent[cur.r][cur.c]; }
 ```
 
-### 08_circular_queue
+### 08 环形队列
 
-- 重点：用取模实现首尾相接，`front/rear` 更新要统一。
-- 容易忘：判空判满定义必须和实现一致（通常预留一个空位）。
+判空：`front == rear`；判满：`(rear + 1) % cap == front`（预留一个空位）。
 
-### 09_word_counter
-
-- 重点：明确"何时开始一个单词，何时结束"。
-- 容易忘：空格、换行、制表符都是分隔符。
+### 09 词计数
 
 ```c
 if (isspace(ch)) in_word = 0;
 else if (!in_word) { count++; in_word = 1; }
 ```
 
-### 10_my_strcpy
-
-- 重点：逐字符拷贝，最后补 `\0`。
+### 10 my_strcpy
 
 ```c
 int i = 0;
-while (src[i] != '\0') { dest[i] = src[i]; i++; }
+while (src[i]) { dest[i] = src[i]; i++; }
 dest[i] = '\0';
 ```
 
-### 11_command_interpreter
+### 11 命令解析器
 
-- 重点：状态机解析，`OUT_WORD` / `IN_WORD` 两个状态。
-- 容易忘：`\0` 也是边界，结束单词时把分隔符改成 `\0`。
+状态机：`OUT_WORD` / `IN_WORD`；`\0` 也要当作分隔符处理，结束单词。
 
 ```c
 if (state == OUT_WORD) {
-  if (ch != ' ' && ch != '\t' && ch != '\0') { argv[argc++] = &buf[i]; state = IN_WORD; }
+    if (ch && ch != ' ' && ch != '\t') { argv[argc++] = &buf[i]; state = IN_WORD; }
 } else {
-  if (ch == ' ' || ch == '\t') { buf[i] = '\0'; state = OUT_WORD; }
+    if (!ch || ch == ' ' || ch == '\t') { buf[i] = '\0'; state = OUT_WORD; }
 }
 ```
 
-### 12_student_management
+### 12 学生管理
 
-- 重点：结构体数组管理，删除时后面的元素要前移。
+删除时后续元素前移：
 
 ```c
 for (int i = pos; i < count - 1; i++) students[i] = students[i + 1];
 count--;
 ```
 
-### 13_universal_sorter
+### 13 通用排序
 
-- 重点：比较函数参数化，返回值语义（负/零/正）全程一致。
+`qsort` 的比较函数返回负/零/正，语义要全程一致；泛型用 `void *` 接收再强转。
 
-### 14_calculator
+### 14 计算器
 
-- 重点：`switch` 分发运算，注意除零。
+`switch` 分发四则运算；除法必须先判 `b == 0`，否则是 UB。
 
-### 15_url_parser
+### 15 URL 解析
 
-- 重点：先按结构拆字段，再校验每段；注意无端口、无路径等分支。
+先用 `strstr` 找 `://` 拆出协议，再找第一个 `/` 分隔主机和路径，端口在主机里用 `:` 再次拆分。
 
-### 16_mysed
+### 16 mysed / 17 myfile / 18 mywc / 19 mytrans
 
-- 重点：按行读取并执行替换，是否替换全部匹配按题意来。
+> 逻辑较直接，参见总览表格中的核心要点即可。
 
-### 17_myfile
+### 21 单链表约瑟夫
 
-- 重点：文件读写、定位、错误处理返回码要完整，失败时不能继续用无效句柄。
+删节点顺序：**先存 next → 再 free → 再移动**，不要在 free 之后读 `current->next`。
 
-### 18_mywc
+### 22 双向环形队列
 
-- 重点：字符/单词/行计数状态清晰；最后一行无换行符时行数要对。
+入队出队时前后指针（`prev`/`next`）必须**同步**更新，漏掉其中一个就断链。
 
-### 19_mytrans
+### 23 环形链表约瑟夫
 
-- 重点：字符转换逐字符处理，明确转换规则的覆盖范围。
-- 容易忘：大小写互转用 `toupper`/`tolower`，非字母字符保持不变。
-
-### 21_singly_linked_list_josephus
-
-- 重点：单链表约瑟夫环，删节点前先 `link next = next_wrap(current)`，再 `delete(current)`，再 `current = next`。
-- 容易忘：`next_wrap` 依赖 `traverse` 找头节点，删完节点后链表结构变化但仍能正确找头。
-
-### 22_doubly_circular_queue
-
-- 重点：双向环形队列，入队/出队时前后指针都要同步更新。
-
-### 23_circular_linked_list_josephus
-
-- 重点：环形链表，删节点时 `prev->next = next` 维护链路，`prev` 必须始终是 `current` 的前驱。
-- 容易忘：`prev` 要跟着 `current` 一起走，每步报数都要同步移动。
+`prev` 要跟着 `current` 每步同步移动，不能只在删除时才更新。
 
 ```c
-for (int i = 0; i < m - 1; ++i) { prev = current; current = current->next; }
-Node* next = current->next;
-prev->next = next;
+for (int i = 0; i < m - 1; i++) { prev = current; current = current->next; }
+Node *nxt = current->next;
+prev->next = nxt;
 free(current);
-current = next;
+current = nxt;
 ```
 
-### 24_prev_binary_tree
+### 24 前序二叉树
 
-- 重点：前序遍历顺序是 根 → 左 → 右，递归时先处理当前节点再向下走。
-- 容易忘：空节点（`NULL`）是递归终止条件，必须检查。
+递归前先判 `NULL`；顺序严格是 根 → 左 → 右。
 
-### 25_counter_letter
-
-- 重点：26 个桶 `count['z'-'a']`，字母转小写后统一计数。
-- 容易忘：非字母字符跳过，不要计入任何桶。
-
-### 26_hash_counter
-
-- 重点：哈希表统计词频，`insert` 时先查找是否存在，存在则 `count++`，不存在才创建新节点（`count=1`）。
-- 坑：`strdup` 不是 C11 标准函数，用 `-std=c11` 编译时需要在文件顶部加 `#define _POSIX_C_SOURCE 200809L`，否则返回值被当 `int` 处理导致段错误。
-
-### 27_asm_gcd
-
-- 重点：内联汇编 `asm` 实现辗转相除，注意输入/输出/破坏寄存器约束。
-
-### 28_operator_overflow
-
-- 重点：无符号整数各运算的溢出判断条件。
-  - 加法：`a + b < a`
-  - 减法：`a - b > a`
-  - 乘法：`b != 0 && a * b / b != a`
-  - 除法：除零视为溢出
-
-### 29_swap_endian
-
-- 重点：位操作字节序翻转。
+### 25 字母计数
 
 ```c
-uint32_t swap = ((x & 0xFF) << 24) | ((x & 0xFF00) << 8)
-              | ((x >> 8) & 0xFF00) | ((x >> 24) & 0xFF);
+if (isalpha(ch)) count[tolower(ch) - 'a']++;
 ```
 
-### 30_debug_print
+### 26 哈希词频统计
 
-- 重点：用宏实现调试输出，`__FILE__`、`__LINE__`、`__func__` 是编译器内置宏。
-- 容易忘：`do { ... } while(0)` 包裹宏体，避免 if-else 时出现语法问题。
+⚠️ **`strdup` 坑**：`-std=c11` 下 `strdup` 未声明，返回值被隐式当 `int`，导致指针截断段错误。
+修复：文件顶部加 `#define _POSIX_C_SOURCE 200809L`。
 
-### 31_event_handler
+### 27 汇编 GCD
 
-- 重点：函数指针数组做事件分发，用 `typedef void (*Handler)(void)` 等定义类型。
+内联汇编输入/输出/破坏寄存器约束三者都要写完整，否则编译器优化出错。
 
-### 32_container_of_macro
+### 28 无符号整数溢出检测
 
-- 重点：`container_of(ptr, type, member)` = `(type *)((char*)(ptr) - offsetof(type, member))`。
-- 容易忘：`offsetof` 在 `<stddef.h>` 中，强转为 `char*` 再减偏移是关键。
+| 运算 | 溢出条件 |
+| --- | --- |
+| `a + b` | `a + b < a` |
+| `a - b` | `a - b > a` |
+| `a * b` | `b != 0 && a * b / b != a` |
+| `a / b` | `b == 0` |
 
-### 33_garray_dynamic_array
+### 29 字节序交换
 
-- 重点：`realloc` 扩容，`void*` + 元素字节大小实现泛型，`memcpy` 追加元素。
-- 容易忘：偏移计算 `(char*)arr->data + arr->len * arr->elem_size`。
+```c
+uint32_t swap32(uint32_t x) {
+    return ((x & 0xFF) << 24) | ((x & 0xFF00) << 8)
+         | ((x >> 8) & 0xFF00) | ((x >> 24) & 0xFF);
+}
+```
 
-### 34_protocol_header_parser
+### 30 调试打印宏
 
-- 重点：按固定偏移读取二进制字段，注意网络字节序转换（`ntohs`/`ntohl`）。
-- 容易忘：结构体可能有对齐 padding，直接强转指针比结构体更可靠。
+```c
+#define DBG(fmt, ...) \
+    do { fprintf(stderr, "[%s:%d %s] " fmt "\n", \
+         __FILE__, __LINE__, __func__, ##__VA_ARGS__); } while(0)
+```
 
-### 37_bitmap_operations
+`do { } while(0)` 避免 if-else 下宏展开产生语法歧义。
 
-- 重点：位图的三个核心操作：`set`（`|=`）、`clear`（`&= ~`）、`test`（`&`）。
-- 容易忘：字节下标 `index / 8`，位下标 `index % 8`，两者不要搞混。
+### 31 事件处理器
 
-## 做题前提醒
+```c
+typedef void (*Handler)(void);
+Handler handlers[MAX_EVENT] = { handler_a, handler_b, ... };
+handlers[event]();  // 直接下标分发
+```
 
-每次开始新题前，先问自己：
+### 32 container_of 宏
 
-1. 测试到底要什么输出格式？
-2. 核心数据结构是什么：数组、栈、队列、链表、哈希还是树？
-3. 有没有明显边界条件：空输入、越界、`\0`、起点终点、数组长度？
-4. 如果是链表题：删节点时有没有维护前驱？
-5. 如果是 BFS：队列不是路径，`parent` 怎么存？
-6. 如果是 DFS：栈里装的是当前路径，不是所有访问点。
-7. 如果是二分查找：先确认数据有序，再写 `left/right/mid`。
+```c
+#define container_of(ptr, type, member) \
+    ((type *)((char *)(ptr) - offsetof(type, member)))
+```
 
-## 建议下一批练习
+`offsetof` 来自 `<stddef.h>`；强转为 `char *` 后做字节级减法。
 
-1. `20_mybash`（shell 实现，难度较高，建议先搞清楚 `fork`/`exec`/`pipe`）
-2. `35_elf_info_parser`（ELF 文件格式解析）
-3. `36_lru_cache`（哈希表 + 双向链表）
-4. `38_thread_safe_ring_buffer`（环形缓冲 + 互斥锁）
-5. `39_strtok_r_thread_safe`（线程安全字符串分割）
-6. `40_bloom_filter_bitmap`（布隆过滤器，位图应用）
+### 33 泛型动态数组
+
+偏移计算：`(char *)arr->data + arr->len * arr->elem_size`。
+扩容：`realloc`，失败时原指针仍有效，不要直接覆盖。
+
+### 34 协议头解析
+
+结构体可能有对齐 padding，直接用字节偏移比强转结构体指针更可靠；`ntohs`/`ntohl` 转网络字节序。
+
+### 35 ELF 文件解析
+
+读取 ELF 文件头（`Elf64_Ehdr`）获取 `e_shoff`（节头表偏移）、`e_shentsize`（每项大小）、`e_shnum`（项数）；再读节头字符串表（`e_shstrndx`）定位节名；结构体字段有字节序问题时用 `le16toh`/`le32toh`。
+
+### 37 位图操作
+
+```c
+bitmap[i / 8] |=  (1 << (i % 8));  // set
+bitmap[i / 8] &= ~(1 << (i % 8));  // clear
+bitmap[i / 8] &   (1 << (i % 8));  // test
+```
+
+### 38 线程安全环形缓冲区
+
+**数据结构**：数组 + `head`/`tail`/`count`，`tail` 写入，`head` 读出，下标取模回绕。
+
+**临界区**：所有对 `buf`/`head`/`tail`/`count` 的读写都必须在 `mutex_lock` / `mutex_unlock` 之间。
+
+**条件变量使用规范**：
+- 满则等 `not_full`，空则等 `not_empty`
+- 等待条件**必须用 `while`**，不能用 `if`（防虚假唤醒 + 多消费者竞争）
+- `cond_wait` = 原子释放锁 → 睡眠 → 被唤醒 → 重新加锁 → 返回
+
+```c
+// push 骨架
+pthread_mutex_lock(&rb->mtx);
+while (rb->count == rb->capacity)
+    pthread_cond_wait(&rb->not_full, &rb->mtx);
+rb->buf[rb->tail] = val;
+rb->tail = (rb->tail + 1) % rb->capacity;
+rb->count++;
+pthread_cond_signal(&rb->not_empty);
+pthread_mutex_unlock(&rb->mtx);
+```
+
+**producer / consumer 本身极简**：只需循环调用 `rb_push` / `rb_pop`，加锁逻辑全被封装在内部，线程函数记得 `return NULL`。
+
+**`rb_init` 资源泄漏陷阱**：`mutex_init` 成功后若 `cond_init` 失败，需要销毁已初始化的 mutex；`free` 后记得 `rb->buf = NULL`。
+
+---
+
+## 三、开始新题前的 Checklist
+
+
+
+- [ ] 测试期望什么**输出格式**（换行、空格、顺序）？
+- [ ] 核心数据结构是什么：数组 / 栈 / 队列 / 链表 / 哈希 / 树？
+- [ ] 有哪些**边界条件**：空输入、长度为 0/1、`\0`、越界、起点 = 终点？
+- [ ] 链表题：删节点时有没有**维护前驱**？
+- [ ] BFS 题：队列存的是**点**，`parent` 怎么记？
+- [ ] DFS 题：栈里装的是**当前路径**，回退逻辑对不对？
+- [ ] 二分查找：数据**有序**了吗？`left`/`right`/`mid` 更新方式？
+- [ ] 用了 POSIX 扩展函数（`strdup` 等）吗？需要加 `_POSIX_C_SOURCE` 吗？
+- [ ] 并发题：`cond_wait` 用 `while` 了吗（不是 `if`）？
+- [ ] 并发题：所有共享变量的读写都在锁保护内吗？
+- [ ] 并发题：线程函数返回 `NULL` 了吗？
+- [ ] 并发题：`init` 失败时有没有清理已成功初始化的资源？
