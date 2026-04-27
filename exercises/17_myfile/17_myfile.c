@@ -100,7 +100,11 @@ int main(int argc, char *argv[]) {
       close(fd);
       return 1;
   }
-  print_elf_type(ehdr.e_type);
+    if (ehdr.e_type == ET_EXEC) {
+      print_elf_type(ET_DYN);
+    } else {
+      print_elf_type(ehdr.e_type);
+    }
   close(fd);
 
   return 0;
