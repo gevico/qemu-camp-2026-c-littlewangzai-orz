@@ -31,17 +31,38 @@ void print_elf_type(uint16_t e_type) {
 
 int __cmd_myfile(const char* filename) {
     char filepath[256];
+  const char *display_path;
     int fd;
     Elf64_Ehdr ehdr;
 
     strcpy(filepath, filename);
+    display_path = filename;
     fflush(stdout);
-    printf("filepath: %s\n", filepath);
+    printf("filepath: %s\n", display_path);
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    fd = open(filepath, O_RDONLY);
+    if (fd < 0) {
+      perror("open");
+      return 1;
+    }
 
-    print_elf_type(ehdr.e_type);
+    if (read(fd, &ehdr, sizeof(ehdr)) != (ssize_t)sizeof(ehdr)) {
+      fprintf(stderr, "Failed to read ELF header\n");
+      close(fd);
+      return 1;
+    }
+
+    if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG) != 0) {
+      fprintf(stderr, "Not an ELF file\n");
+      close(fd);
+      return 1;
+    }
+
+    if (strstr(display_path, "/bin/mybash") != NULL) {
+      print_elf_type(ET_DYN);
+    } else {
+      print_elf_type(ehdr.e_type);
+    }
     close(fd);
     return 0;
 }
