@@ -6,22 +6,37 @@
 
 #include "common.h"
 
-#define MAX_INPUT 1024
+#define INPUT_BUFFER_SIZE 1024
 #define MAX_ARGS 64
 
 static const char *map_workspace_path(const char *path) {
-  static char mapped[1024];
+  static char mapped[4096];
   const char *prefix = "/workspace/exercises/20_mybash/";
+  char cwd[4096];
+  char *marker;
+  size_t base_len;
+  const char *suffix;
 
   if (path == NULL) {
     return NULL;
   }
 
   if (strncmp(path, prefix, strlen(prefix)) == 0) {
-    snprintf(mapped, sizeof(mapped),
-             "/home/chenyihang/qemu-camp-2026-c-littlewangzai-orz/exercises/20_mybash/%s",
-             path + strlen(prefix));
-    return mapped;
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+      marker = strstr(cwd, "/exercises/20_mybash");
+      if (marker != NULL) {
+        *marker = '\0';
+        suffix = path + strlen(prefix);
+        base_len = strlen(cwd);
+        if (base_len + strlen("/exercises/20_mybash/") + strlen(suffix) + 1 <
+            sizeof(mapped)) {
+          memcpy(mapped, cwd, base_len);
+          strcpy(mapped + base_len, "/exercises/20_mybash/");
+          strcat(mapped, suffix);
+          return mapped;
+        }
+      }
+    }
   }
 
   return path;
@@ -93,7 +108,7 @@ int parse_input(char *input, char **args) {
   int i = 0;
   int in_quotes = 0;
   char *buf = input;
-  char arg_buf[MAX_INPUT];  // 临时存储当前正在解析的参数
+  char arg_buf[INPUT_BUFFER_SIZE];  // 临时存储当前正在解析的参数
   int arg_buf_idx = 0;
 
   memset(arg_buf, 0, sizeof(arg_buf));
@@ -131,7 +146,7 @@ int parse_input(char *input, char **args) {
 // ======================
 
 int main(int argc, char *argv[]) {
-  char input[MAX_INPUT];
+  char input[INPUT_BUFFER_SIZE];
   char *args[MAX_ARGS];
 
   if (argc > 1) {

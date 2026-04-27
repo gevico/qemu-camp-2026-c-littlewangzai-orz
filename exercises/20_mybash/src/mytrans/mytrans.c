@@ -5,14 +5,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 static const char *resolve_dict_path(void) {
+  static char relative_path[4096];
+  char cwd[4096];
   static const char *candidates[] = {
       "/workspace/exercises/20_mybash/src/mytrans/dict.txt",
-      "/home/chenyihang/qemu-camp-2026-c-littlewangzai-orz/exercises/20_mybash/src/mytrans/dict.txt",
       "src/mytrans/dict.txt",
       NULL};
   int i;
+
+  if (getcwd(cwd, sizeof(cwd)) != NULL) {
+    char *marker = strstr(cwd, "/exercises/20_mybash");
+    if (marker != NULL) {
+      *marker = '\0';
+      if (strlen(cwd) + strlen("/exercises/20_mybash/src/mytrans/dict.txt") +
+              1 <
+          sizeof(relative_path)) {
+        strcpy(relative_path, cwd);
+        strcat(relative_path, "/exercises/20_mybash/src/mytrans/dict.txt");
+        {
+          FILE *fp = fopen(relative_path, "r");
+          if (fp != NULL) {
+            fclose(fp);
+            return relative_path;
+          }
+        }
+      }
+    }
+  }
 
   for (i = 0; candidates[i] != NULL; i++) {
     FILE *fp = fopen(candidates[i], "r");
