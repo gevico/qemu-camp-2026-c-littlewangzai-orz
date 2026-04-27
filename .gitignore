@@ -37,8 +37,10 @@ exercises/*/*
 !exercises/*/*.txt
 !exercises/*/*.md
 !exercises/*/Makefile
+!exercises/20_mybash/test_20_mybash.sh
 tests/test_*
 !tests/test_*.c
+!tests/test_20_mybash.sh
 
 # 测试结果
 test_results_summary.json

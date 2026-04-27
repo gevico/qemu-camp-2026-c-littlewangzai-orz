@@ -208,7 +208,7 @@ count--;
 - `parse_input` 要支持带双引号参数
 - `myfile` 输出要和测试断言严格一致
 - `mytrans` 需要规整 token、统一小写，避免标点影响匹配
-- `tests/test_20_mybash.sh` 需要作为测试入口存在（测试二进制实际从 `tests/` 目录执行）
+- `tests/` 需要作为测试入口存在（测试二进制实际从 `tests/` 目录执行）
 
 ### 21 单链表约瑟夫
 
