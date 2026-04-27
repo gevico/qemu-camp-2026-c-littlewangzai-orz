@@ -73,6 +73,8 @@
      char compile_cmd[512];
      char run_cmd[256];
      FILE* fp;
+     char *compile_output;
+     size_t compile_output_size;
      
      // 清空输出缓冲区
      memset(output, 0, output_size);
@@ -109,15 +111,24 @@
     }
     
      
-     char compile_output[4096] = {0};
-     size_t bytes_read = fread(compile_output, 1, sizeof(compile_output) - 1, fp);
+     compile_output_size = output_size > 8192 ? output_size : 8192;
+     compile_output = (char *)calloc(1, compile_output_size);
+     if (compile_output == NULL) {
+         pclose(fp);
+         strncpy(output, "无法分配编译输出缓冲区", output_size - 1);
+         return -1;
+     }
+
+     size_t bytes_read = fread(compile_output, 1, compile_output_size - 1, fp);
      int compile_status = pclose(fp);
      
      // 检查编译是否成功
      if (compile_status != 0) {
          snprintf(output, output_size, "编译失败:\n%s", compile_output);
+         free(compile_output);
          return -1;
      }
+     free(compile_output);
      
      // 运行程序
      switch (is_make) {
